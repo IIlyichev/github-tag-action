@@ -1,4 +1,4 @@
-name: "GitHub Tag (per branch)"
+name: "GitHub Tag (with tags filter)"
 description: "Bump and push git tag on merge"
 author: "Mathieu Dutour"
 outputs:
@@ -28,6 +28,9 @@ inputs:
     description: "A prefix to the tag name (default: `v`)."
     required: false
     default: "v"
+  tag_filter:
+    description: "Tags filter string."
+    required: false
   append_to_pre_release_tag:
     description: "A suffix to a pre-release tag name (default: `<branch>`)."
     required: false

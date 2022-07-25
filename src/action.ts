@@ -20,6 +20,7 @@ export default async function main() {
   const defaultPreReleaseBump = core.getInput('default_prerelease_bump') as
     | ReleaseType
     | 'false';
+  const tagFilter = core.getInput('tag_filter');
   const tagPrefix = core.getInput('tag_prefix');
   const customTag = core.getInput('custom_tag');
   const releaseBranches = core.getInput('release_branches');
@@ -66,9 +67,11 @@ export default async function main() {
   ).replace(/[^a-zA-Z0-9-]/g, '-');
 
   const prefixRegex = new RegExp(`^${tagPrefix}`);
+  const tagPrefixFilterRegex = new RegExp(`^${tagFilter}`);
 
   const validTags = await getValidTags(
-    prefixRegex,
+    tagPrefixFilterRegex,
+    tagName => tagName.match(tagPrefixFilterRegex) !== null,
     /true/i.test(shouldFetchAllTags)
   );
   const latestTag = getLatestTag(validTags, prefixRegex, tagPrefix);

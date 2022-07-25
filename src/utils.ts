@@ -8,12 +8,17 @@ import { Await } from './ts';
 
 type Tags = Await<ReturnType<typeof listTags>>;
 
+type TagFilter = (tagName: string) => boolean;
 export async function getValidTags(
   prefixRegex: RegExp,
+  tagFilter: TagFilter,
   shouldFetchAllTags: boolean
 ) {
-  const tags = await listTags(shouldFetchAllTags);
-
+  const allTags = await listTags(shouldFetchAllTags);
+  const tags = tagFilter
+    ? allTags.filter(t => tagFilter(t.name))
+    : allTags;
+    
   const invalidTags = tags.filter(
     (tag) => !valid(tag.name.replace(prefixRegex, ''))
   );

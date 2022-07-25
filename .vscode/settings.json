@@ -6,5 +6,11 @@
     "markdown",
     "latex",
     "plaintext"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "tab.activeBorderTop": "#0A84FF",
+    "activityBar.background": "#362D05",
+    "titleBar.activeBackground": "#4B3F07",
+    "titleBar.activeForeground": "#FDFBEE"
+  }
 }

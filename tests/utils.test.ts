@@ -71,7 +71,7 @@ describe('utils', () => {
     /*
      * When
      */
-    const validTags = await getValidTags(regex, false);
+    const validTags = await getValidTags(regex, () => true, false);
 
     /*
      * Then
@@ -121,7 +121,7 @@ describe('utils', () => {
     /*
      * When
      */
-    const validTags = await getValidTags(regex, false);
+    const validTags = await getValidTags(regex, () => true, false);
 
     /*
      * Then
