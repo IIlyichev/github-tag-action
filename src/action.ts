@@ -67,11 +67,13 @@ export default async function main() {
   ).replace(/[^a-zA-Z0-9-]/g, '-');
 
   const prefixRegex = new RegExp(`^${tagPrefix}`);
-  const tagPrefixFilterRegex = new RegExp(`^${tagFilter}`);
+  const tagFilterRegex = tagFilter
+    ? new RegExp(tagFilter)
+    : null;
 
   const validTags = await getValidTags(
-    tagPrefixFilterRegex,
-    tagName => tagName.match(tagPrefixFilterRegex) !== null,
+    prefixRegex,
+    tagName => tagFilterRegex == null || tagName.match(tagFilterRegex) !== null,
     /true/i.test(shouldFetchAllTags)
   );
   const latestTag = getLatestTag(validTags, prefixRegex, tagPrefix);
